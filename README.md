@@ -36,6 +36,12 @@ Mark these off as they are completed ~like this~
 - Create persistent preference data from user input
 - Change the behavior of the app based on user preferences
 
+### Lesson Notes
+
+**Lession 5**
+- Prefer webp & PNG images for Drawable resources
+- A 9-patch is a PNG image in which you define stretchable regions. Use a 9-patch as the background image for a View to make sure the View looks correct for different screen sizes and orientations. Save 9-patch files with a .9.png extension and store them in the res/drawable folder. Use them with the android:src attribute for an ImageView and its descendants, or to create a NinePatchDrawable class in Java code.
+
 ## Resources
 
 [Exam Sign-up / Content Page](https://developers.google.com/training/certification/associate-android-developer/])
