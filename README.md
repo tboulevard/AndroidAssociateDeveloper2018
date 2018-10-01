@@ -41,6 +41,11 @@ Mark these off as they are completed ~like this~
 **Lession 5**
 - Prefer webp & PNG images for Drawable resources
 - A 9-patch is a PNG image in which you define stretchable regions. Use a 9-patch as the background image for a View to make sure the View looks correct for different screen sizes and orientations. Save 9-patch files with a .9.png extension and store them in the res/drawable folder. Use them with the android:src attribute for an ImageView and its descendants, or to create a NinePatchDrawable class in Java code.
+- What's the difference between a style and a theme?
+   > A style applies to a View. In XML, you apply a style using the style attribute.
+   > A theme applies to an Activity or an entire app, rather than to an individual View. In XML, you apply a theme using the android:theme attribute.
+   > **Note:** Any style can be used as a theme. For example, you could apply the CodeFont style as a theme for an Activity, and all the text inside the Activity would use gray monospace font.
+
 
 ## Resources
 
