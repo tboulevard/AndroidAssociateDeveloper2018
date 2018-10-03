@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AndroidAssociateDeveloper2018</string>
+    <string name="share_text_implicit_intent">Share Text! (Implicit Intent)</string>
+</resources>
