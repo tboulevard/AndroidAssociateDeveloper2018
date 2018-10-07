@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         /**
          * Navigation Drawer stuff
          */
-
+        // TODO: Setup nav drawer itme selection logic!
         val navigationView: NavigationView = findViewById(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener { menuItem ->
             // set item as selected to persist highlight

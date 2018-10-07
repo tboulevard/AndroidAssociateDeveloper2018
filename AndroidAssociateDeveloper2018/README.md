@@ -9,8 +9,8 @@ Mark these off as they are completed ~like this~
 ### Testing and debugging
 - Write and execute local JVM unit tests
 - Write and execute Android UI tests
-- ~Use the system log to output debug information~
-- ~Debug and fix issues with an app's functional behavior and usability~
+- Use the system log to output debug information
+- Debug and fix issues with an app's functional behavior and usability
 
 ### User interface (UI) and app functionality
 - ~Create an Activity that displays a layout~
