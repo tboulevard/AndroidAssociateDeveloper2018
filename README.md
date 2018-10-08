@@ -33,8 +33,8 @@ Mark these off as they are completed ~like this~
 - Observe and respond to changing data using LiveData
 - Use a Repository to handle data operations
 - Read and parse raw resources or asset files
-- Create persistent preference data from user input
-- Change the behavior of the app based on user preferences
+- ~Create persistent preference data from user input~
+- ~Change the behavior of the app based on user preferences~
 
 ### Lesson Notes
 
