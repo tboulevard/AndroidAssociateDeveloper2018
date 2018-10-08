@@ -9,19 +9,19 @@ Mark these off as they are completed ~like this~
 ### Testing and debugging
 - Write and execute local JVM unit tests
 - Write and execute Android UI tests
-- Use the system log to output debug information
-- Debug and fix issues with an app's functional behavior and usability
+- ~Use the system log to output debug information~
+- ~Debug and fix issues with an app's functional behavior and usability~
 
 ### User interface (UI) and app functionality
-- Create an Activity that displays a layout
-- Construct a UI with ConstraintLayout
+- ~Create an Activity that displays a layout~
+- ~Construct a UI with ConstraintLayout~
 - Create a custom view class and add it to a layout
 - Add accessibility hooks to a custom view
 - Apply content descriptions to views for accessibility
-- Implement a custom app theme
+- ~Implement a custom app theme~
 - Display items in a RecyclerView
 - Bind local data to a RecyclerView list using the paging library
-- Implement menu-based or drawer navigation
+- ~Implement menu-based or drawer navigation~
 - Localize the app
 - Display notifications, toasts, and snackbar messages
 - Schedule a background task using JobScheduler
@@ -49,6 +49,6 @@ Mark these off as they are completed ~like this~
 
 ## Resources
 
-[Exam Sign-up / Content Page](https://developers.google.com/training/certification/associate-android-developer/])
+[Exam Sign-up / Content Page](https://developers.google.com/training/certification/associate-android-developer/)
 
 [Android Developer Fundamentals (Version 2)](https://google-developer-training.github.io/android-developer-fundamentals-course-concepts-v2/)
