@@ -1,12 +1,16 @@
 package com.boulevard.androidassociatedeveloper2018
 
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.ShareCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.preference.PreferenceManager
 import android.view.MenuItem
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -16,36 +20,13 @@ import kotlinx.android.synthetic.main.activity_main.*
  * onPause, onStop, onDestroy, onCreate, onStart, onResume
  *
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     private var count = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
-        share_text_button.setOnClickListener {
-
-            /* Implicit intent that shares text */
-            ShareCompat.IntentBuilder
-                    .from(this)  // information about the calling activity
-                    .setType("text/plain")  // mime type for the data
-                    .setChooserTitle("Share this text with: ")  //title for the app chooser
-                    .setText(sample_edit_text.text.toString())  // intent data
-                    .startChooser()  // send the intent
-
-        }
-
-        increment_counter_button.setOnClickListener {
-            count++
-            counter_textview.text = count.toString()
-        }
-
-        decrement_counter_button.setOnClickListener {
-            count--
-            counter_textview.text = count.toString()
-        }
 
         // Retrieve saved out state
         if (savedInstanceState != null) {
@@ -56,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         /**
-         * Setup custom toolbar (used for launching nav drawer)
+         * Setup custom toolbar (used for launching navigation drawer)
          */
         setSupportActionBar(main_toolbar)
 
@@ -69,7 +50,6 @@ class MainActivity : AppCompatActivity() {
         /**
          * Navigation Drawer stuff
          */
-        // TODO: Setup nav drawer item selection logic!
         val navigationView: NavigationView = findViewById(R.id.navigation_drawer_view)
         navigationView.setNavigationItemSelectedListener { menuItem ->
             // set item as selected to persist highlight
@@ -83,6 +63,48 @@ class MainActivity : AppCompatActivity() {
 
             true
         }
+
+        /**
+         * Shared pref setup
+         */
+        setupSharedPreferences()
+    }
+
+    /**
+     * Bound within MainActivity in share_text_button's onClick
+     *
+     * (Notice how the view is passed in as an argument)
+     */
+    fun shareText(view: View) {
+
+        /* Implicit intent that shares text */
+        ShareCompat.IntentBuilder
+                .from(this)  // information about the calling activity
+                .setType("text/plain")  // mime type for the data
+                .setChooserTitle("Share this text with: ")  //title for the app chooser
+                .setText(sample_edit_text.text.toString())  // intent data
+                .startChooser()  // send the intent
+    }
+
+    /**
+     * Bound within MainActivity in decrement_counter_button's onClick
+     */
+    fun incrementCounter(view : View) {
+        count++
+        counter_textview.text = count.toString()
+    }
+
+    /**
+     * Bound within MainActivity in decrement_counter_button's onClick
+     */
+    fun decrementCounter(view : View) {
+        count--
+        counter_textview.text = count.toString()
+    }
+
+    fun launchPreferencesActivity(view : View) {
+        val intent = Intent(this, PreferencesActivity::class.java)
+        startActivity(intent)
     }
 
     /**
@@ -155,5 +177,33 @@ class MainActivity : AppCompatActivity() {
         outState?.putInt("currentCount", count)
     }
 
+    /* Shared preferences stuff */
+    private fun setupSharedPreferences() {
 
+        // Get all of the values from shared preferences to set it up
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+
+        val incrementPref : Boolean = sharedPreferences.getBoolean(getString(R.string.IncrementPrefKey), false)
+
+        if (incrementPref) {
+            decrement_counter_button.visibility = View.GONE
+        } else {
+            decrement_counter_button.visibility = View.VISIBLE
+        }
+
+        // Register the listener
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this)
+    }
+
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String?) {
+        if (key == getString(R.string.IncrementPrefKey)) {
+
+            val incrementPref : Boolean = sharedPreferences.getBoolean(getString(R.string.IncrementPrefKey), false)
+            if (incrementPref) {
+                decrement_counter_button.visibility = View.GONE
+            } else {
+                decrement_counter_button.visibility = View.VISIBLE
+            }
+        }
+    }
 }

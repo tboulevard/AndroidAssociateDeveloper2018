@@ -33,6 +33,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:src="@drawable/ic_increment_up"
+            android:onClick="incrementCounter"
             app:layout_constraintBottom_toTopOf="@id/counter_textview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +60,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/ic_increment_down"
-            android:text="Decrement"
+            android:text="@string/decrement_button_text"
+            android:onClick="decrementCounter"
             app:layout_constraintBottom_toTopOf="@id/nav_drawer_selection_textview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -95,6 +97,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/share_text_implicit_intent"
+            android:onClick="shareText"
             app:layout_constraintBottom_toTopOf="@id/sample_edit_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -123,6 +126,7 @@
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/ic_fab_button"
+            android:onClick="launchPreferencesActivity"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -133,7 +137,7 @@
 
     <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
     <!-- IMPORTANT!!! THIS HAS TO BE THE LAST ELEMENT IN THE LAYOUT FOR SELECT ITEM LISTENER
-         TO WORK. See: https://stackoverflow.com/a/49483633/9375092   -->
+         TO WORK. See: https://stackoverflow.com/a/49483633/9375092 -->
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_drawer_view"
         android:layout_width="wrap_content"
