@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Retrieve saved out state
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             count = savedInstanceState.getInt("currentCount")
             counter_textview.text = count.toString()
         } else {
@@ -69,8 +69,8 @@ class MainActivity : AppCompatActivity() {
         /**
          * Navigation Drawer stuff
          */
-        // TODO: Setup nav drawer itme selection logic!
-        val navigationView: NavigationView = findViewById(R.id.nav_view)
+        // TODO: Setup nav drawer item selection logic!
+        val navigationView: NavigationView = findViewById(R.id.navigation_drawer_view)
         navigationView.setNavigationItemSelectedListener { menuItem ->
             // set item as selected to persist highlight
             menuItem.isChecked = true
@@ -79,6 +79,7 @@ class MainActivity : AppCompatActivity() {
 
             // Add code here to update the UI based on the item selected
             // For example, swap UI fragments here
+            nav_drawer_selection_textview.text = menuItem.title.toString()
 
             true
         }
