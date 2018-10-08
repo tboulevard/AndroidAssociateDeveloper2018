@@ -49,6 +49,6 @@ Mark these off as they are completed ~like this~
 
 ## Resources
 
-[Exam Sign-up / Content Page](https://developers.google.com/training/certification/associate-android-developer/])
+[Exam Sign-up / Content Page](https://developers.google.com/training/certification/associate-android-developer/)
 
 [Android Developer Fundamentals (Version 2)](https://google-developer-training.github.io/android-developer-fundamentals-course-concepts-v2/)
