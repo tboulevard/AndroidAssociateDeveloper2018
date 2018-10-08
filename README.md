@@ -21,7 +21,7 @@ Mark these off as they are completed ~like this~
 - ~Implement a custom app theme~
 - Display items in a RecyclerView
 - Bind local data to a RecyclerView list using the paging library
-- Implement menu-based or drawer navigation
+- ~Implement menu-based or drawer navigation~
 - Localize the app
 - Display notifications, toasts, and snackbar messages
 - Schedule a background task using JobScheduler
