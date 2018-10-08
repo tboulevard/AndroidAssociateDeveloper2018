@@ -9,6 +9,7 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.preference.PreferenceManager
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
@@ -89,7 +90,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     /**
      * Bound within MainActivity in decrement_counter_button's onClick
      */
-    fun incrementCounter(view : View) {
+    fun incrementCounter(view: View) {
         count++
         counter_textview.text = count.toString()
     }
@@ -97,25 +98,27 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     /**
      * Bound within MainActivity in decrement_counter_button's onClick
      */
-    fun decrementCounter(view : View) {
+    fun decrementCounter(view: View) {
         count--
         counter_textview.text = count.toString()
     }
 
-    fun launchPreferencesActivity(view : View) {
-        val intent = Intent(this, PreferencesActivity::class.java)
-        startActivity(intent)
-    }
-
     /**
-     * Custom toolbar hamburger icon launches drawer
+     * Handles various menu navigations. Drawer and settings for now
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             // Somehow this id correlates to hamburger icon in custom toolbar...
+            // For hamburger icon to drawer
             android.R.id.home -> {
                 drawer_layout.openDrawer(GravityCompat.START)
                 true
+            }
+            // For settings fragment
+            R.id.action_settings -> {
+                val startPreferencesActivity = Intent(this, PreferencesActivity::class.java)
+                startActivity(startPreferencesActivity)
+                return true
             }
             else -> super.onOptionsItemSelected(item)
         }
@@ -183,7 +186,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         // Get all of the values from shared preferences to set it up
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
-        val incrementPref : Boolean = sharedPreferences.getBoolean(getString(R.string.IncrementPrefKey), false)
+        val incrementPref: Boolean = sharedPreferences.getBoolean(getString(R.string.IncrementPrefKey), false)
 
         if (incrementPref) {
             decrement_counter_button.visibility = View.GONE
@@ -198,12 +201,25 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String?) {
         if (key == getString(R.string.IncrementPrefKey)) {
 
-            val incrementPref : Boolean = sharedPreferences.getBoolean(getString(R.string.IncrementPrefKey), false)
+            // Hide and show decrement button based on shared pref
+            val incrementPref: Boolean = sharedPreferences.getBoolean(getString(R.string.IncrementPrefKey), false)
             if (incrementPref) {
                 decrement_counter_button.visibility = View.GONE
             } else {
                 decrement_counter_button.visibility = View.VISIBLE
             }
         }
+    }
+
+    /**
+     * For three dot settings
+     */
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        /* Use AppCompatActivity's method getMenuInflater to get a handle on the menu inflater */
+        val inflater = menuInflater
+        /* Use the inflater's inflate method to inflate our visualizer_menu layout to this menu */
+        inflater.inflate(R.menu.settings_menu, menu)
+        /* Return true so that the visualizer_menu is displayed in the Toolbar */
+        return true
     }
 }

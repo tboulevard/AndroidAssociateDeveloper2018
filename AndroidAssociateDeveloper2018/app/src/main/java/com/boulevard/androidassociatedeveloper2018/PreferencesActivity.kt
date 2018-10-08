@@ -5,6 +5,9 @@ import android.support.v4.app.NavUtils
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 
+/**
+ * Host for the SettingsFragment that handles backward navigation.
+ */
 class PreferencesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

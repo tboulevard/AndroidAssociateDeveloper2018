@@ -8,28 +8,25 @@ import android.support.v7.preference.CheckBoxPreference
 
 class SettingsFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListener {
 
-
+    /**
+     * Doesn't do anything yet, but this is where you would add functionality for the
+     * SettingsFragment when a preference is changed.
+     */
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         // Figure out which preference was changed
         val preference = findPreference(key)
         if (null != preference) {
-            // Updates the summary for the preference
+            // Update the summary for the preference here
             if (preference !is CheckBoxPreference) {
                 val value = sharedPreferences?.getString(preference.key, "")
-                //setPreferenceSummary(preference, value)
             }
         }
     }
 
 
     override fun onCreatePreferences(p0: Bundle?, p1: String?) {
-
-        // Add visualizer preferences, defined in the XML file in res->xml->pref_visualizer
+        // Add main activity preferences, defined in the XML file in res->xml->pref_settings
         addPreferencesFromResource(R.xml.pref_settings)
-
-        val sharedPreferences = preferenceScreen.sharedPreferences
-        val prefScreen = preferenceScreen
-        val count = prefScreen.preferenceCount
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
