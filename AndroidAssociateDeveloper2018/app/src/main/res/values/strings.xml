@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">AndroidAssociateDeveloper2018</string>
     <string name="share_text_implicit_intent">Share Text! (Implicit Intent)</string>
+    <string name="nav_drawer_header_title">Nav Drawer Header Title</string>
+    <string name="decrement_button_text">Decrement</string>
+    <string name="IncrementPrefKey">incrementPrefKey</string>
 </resources>

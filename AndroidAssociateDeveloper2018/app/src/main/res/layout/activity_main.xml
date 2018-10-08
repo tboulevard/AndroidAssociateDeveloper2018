@@ -32,6 +32,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:onClick="incrementCounter"
             android:src="@drawable/ic_increment_up"
             app:layout_constraintBottom_toTopOf="@id/counter_textview"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +60,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/ic_increment_down"
-            android:text="Decrement"
+            android:onClick="decrementCounter"
+            android:text="@string/decrement_button_text"
             app:layout_constraintBottom_toTopOf="@id/nav_drawer_selection_textview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,11 +72,11 @@
             android:id="@+id/nav_drawer_selection_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/example_imageview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="No selection made yet."
-            app:layout_constraintBottom_toTopOf="@id/example_imageview"
-            app:layout_constraintTop_toBottomOf="@id/decrement_counter_button" />
+            app:layout_constraintTop_toBottomOf="@id/decrement_counter_button"
+            tools:text="No selection made yet." />
 
         <!-- TODO: Figure out proper way to layout image resources -->
         <ImageView
@@ -94,6 +96,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:onClick="shareText"
             android:text="@string/share_text_implicit_intent"
             app:layout_constraintBottom_toTopOf="@id/sample_edit_text"
             app:layout_constraintEnd_toEndOf="parent"
@@ -133,13 +136,13 @@
 
     <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
     <!-- IMPORTANT!!! THIS HAS TO BE THE LAST ELEMENT IN THE LAYOUT FOR SELECT ITEM LISTENER
-         TO WORK. See: https://stackoverflow.com/a/49483633/9375092   -->
+         TO WORK. See: https://stackoverflow.com/a/49483633/9375092 -->
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_drawer_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:menu="@menu/drawer_view"
-        app:headerLayout="@layout/layout_nav_drawer_header"/>
+        app:headerLayout="@layout/layout_nav_drawer_header"
+        app:menu="@menu/drawer_view" />
 </android.support.v4.widget.DrawerLayout>
