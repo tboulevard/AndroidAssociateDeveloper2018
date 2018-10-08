@@ -45,6 +45,18 @@ Mark these off as they are completed ~like this~
    > A style applies to a View. In XML, you apply a style using the style attribute.
    > A theme applies to an Activity or an entire app, rather than to an individual View. In XML, you apply a theme using the android:theme attribute.
    > **Note:** Any style can be used as a theme. For example, you could apply the CodeFont style as a theme for an Activity, and all the text inside the Activity would use gray monospace font.
+   
+**Background Tasks Notes**
+- Service vs. Loader Use Case Guidelines
+   - Loader
+      - Tied to the Activity Lifecycle
+      - Easy to make **user interface changes** and communicate with Activity 
+      - E.g.: Query database to populate recyclerview
+      - **In short:** If you're loading or processing data that will be used in the UI, use a loader.
+   - Service
+      - Decoupled from user interface
+      - Exists **even when there is no user interface**
+      - **In short:** If you need to process, upload, or download data in a way where the end result will not directly affect the UI, use a service.
 
 
 ## Resources
