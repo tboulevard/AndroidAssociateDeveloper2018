@@ -28,10 +28,7 @@
             style="?android:attr/mediaRouteButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_margin="2dp"
             android:onClick="incrementCounter"
             android:src="@drawable/ic_increment_up"
             app:layout_constraintBottom_toTopOf="@id/counter_textview"
@@ -55,10 +52,7 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_margin="2dp"
             android:drawableLeft="@drawable/ic_increment_down"
             android:onClick="decrementCounter"
             android:text="@string/decrement_button_text"
@@ -72,11 +66,11 @@
             android:id="@+id/nav_drawer_selection_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="No selection made yet."
             app:layout_constraintBottom_toTopOf="@id/example_imageview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/decrement_counter_button"
-            tools:text="No selection made yet." />
+            app:layout_constraintTop_toBottomOf="@id/decrement_counter_button" />
 
         <!-- TODO: Figure out proper way to layout image resources -->
         <ImageView
@@ -98,10 +92,32 @@
             android:layout_marginTop="8dp"
             android:onClick="shareText"
             android:text="@string/share_text_implicit_intent"
-            app:layout_constraintBottom_toTopOf="@id/sample_edit_text"
+            app:layout_constraintBottom_toTopOf="@id/test_notification_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/example_imageview" />
+
+        <Button
+            android:id="@+id/test_notification_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="testNotification"
+            android:text="Test Notification"
+            app:layout_constraintBottom_toTopOf="@id/schedule_test_job_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/share_text_button" />
+
+        <Button
+            android:id="@+id/schedule_test_job_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="scheduleIncrementJob"
+            android:text="Schedule Increment Job"
+            app:layout_constraintBottom_toTopOf="@id/sample_edit_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/test_notification_button" />
 
         <EditText
             android:id="@+id/sample_edit_text"
@@ -109,10 +125,10 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/fab_button"
+            app:layout_constraintBottom_toTopOf="@id/fab_button"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/share_text_button" />
+            app:layout_constraintTop_toBottomOf="@id/schedule_test_job_button" />
 
         <!--
             app:backgroundTint="@color/..." to set color manually
@@ -122,15 +138,15 @@
             android:id="@+id/fab_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="16dp"
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/ic_fab_button"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/sample_edit_text"
-            app:layout_constraintTop_toBottomOf="@id/share_text_button" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sample_edit_text" />
 
     </android.support.constraint.ConstraintLayout>
 

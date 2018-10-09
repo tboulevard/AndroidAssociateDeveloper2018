@@ -12,6 +12,9 @@ import android.support.v7.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.boulevard.androidassociatedeveloper2018.util.JobSchedulerUtil
+import com.boulevard.androidassociatedeveloper2018.util.NotificationsUtil
+import com.boulevard.androidassociatedeveloper2018.util.PreferencesUtil
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -69,6 +72,11 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
          * Shared pref setup
          */
         setupSharedPreferences()
+
+        /**
+         * Set initial counter count from shared prefs
+         */
+        updateCounterCount()
     }
 
     /**
@@ -93,6 +101,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     fun incrementCounter(view: View) {
         count++
         counter_textview.text = count.toString()
+        PreferencesUtil.incrementCounter(this)
     }
 
     /**
@@ -101,6 +110,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     fun decrementCounter(view: View) {
         count--
         counter_textview.text = count.toString()
+        PreferencesUtil.decrementCounter(this)
     }
 
     /**
@@ -186,10 +196,10 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         // Get all of the values from shared preferences to set it up
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
-        val incrementPref: Boolean = sharedPreferences.getBoolean(getString(R.string.IncrementPrefKey), false)
-
+        // Set up initial state
+        val incrementPref: Boolean = PreferencesUtil.getDecrementVisibility(this)
         if (incrementPref) {
-            decrement_counter_button.visibility = View.GONE
+            decrement_counter_button.visibility = View.INVISIBLE
         } else {
             decrement_counter_button.visibility = View.VISIBLE
         }
@@ -198,16 +208,22 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         sharedPreferences.registerOnSharedPreferenceChangeListener(this)
     }
 
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String?) {
-        if (key == getString(R.string.IncrementPrefKey)) {
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
+        if (key.equals(PreferencesUtil.KEY_INCREMENT_PREF)) {
 
             // Hide and show decrement button based on shared pref
-            val incrementPref: Boolean = sharedPreferences.getBoolean(getString(R.string.IncrementPrefKey), false)
+            val incrementPref: Boolean = PreferencesUtil.getDecrementVisibility(this)
             if (incrementPref) {
-                decrement_counter_button.visibility = View.GONE
+                decrement_counter_button.visibility = View.INVISIBLE
+                // Also set set prefs here because it's changing
+                PreferencesUtil.setDecrementVisibility(this, true)
             } else {
                 decrement_counter_button.visibility = View.VISIBLE
+                PreferencesUtil.setDecrementVisibility(this, false)
             }
+        }
+        else if (key.equals(PreferencesUtil.KEY_COUNTER)) {
+            updateCounterCount()
         }
     }
 
@@ -221,5 +237,32 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         inflater.inflate(R.menu.settings_menu, menu)
         /* Return true so that the visualizer_menu is displayed in the Toolbar */
         return true
+    }
+
+    /**
+     * Notifications stuff
+     */
+    fun testNotification(view : View) {
+        NotificationsUtil.remindUser(this)
+    }
+
+    /**
+     * Updates the TextView to display the new count from SharedPrefs
+     *
+     * Updates come from FireBaseJob service
+     */
+    private fun updateCounterCount() {
+        val counterCount = PreferencesUtil.getCounterCount(this)
+        counter_textview.text = counterCount.toString()
+    }
+
+    /**
+     * Job Scheduler set up
+     *
+     * Only triggers once for some reason...
+     */
+    fun scheduleIncrementJob(view : View) {
+
+        JobSchedulerUtil.scheduleIncrementJob(this)
     }
 }
