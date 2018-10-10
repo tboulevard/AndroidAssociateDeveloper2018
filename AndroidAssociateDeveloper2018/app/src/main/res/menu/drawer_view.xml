@@ -5,7 +5,7 @@
             android:id="@+id/nav_cloud"
             android:checked="false"
             android:icon="@drawable/ic_menu_cloud"
-            android:title="cloud" />
+            android:title="Services Example" />
         <item
             android:id="@+id/nav_gallery"
             android:checked="false"
