@@ -24,11 +24,11 @@ Mark these off as they are completed ~like this~
 - ~Implement menu-based or drawer navigation~
 - Localize the app
 - Display notifications, toasts, and snackbar messages
-- Schedule a background task using JobScheduler
-- Efficiently run jobs in the background
+- ~Schedule a background task using JobScheduler~
+- ~Efficiently run jobs in the background~
 
 ### App data and files
-- Define data using Room entities
+- ~Define data using Room entities~
 - Access Room database with data access object (DAO)
 - Observe and respond to changing data using LiveData
 - Use a Repository to handle data operations
