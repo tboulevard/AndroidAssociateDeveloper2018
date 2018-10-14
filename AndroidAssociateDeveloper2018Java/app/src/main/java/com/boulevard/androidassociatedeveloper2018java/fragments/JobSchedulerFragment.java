@@ -1,4 +1,4 @@
-package com.boulevard.androidassociatedeveloper2018java;
+package com.boulevard.androidassociatedeveloper2018java.fragments;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -8,17 +8,22 @@ import android.content.SharedPreferences;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.boulevard.androidassociatedeveloper2018java.R;
 import com.boulevard.androidassociatedeveloper2018java.util.JobSchedulerUtil;
 import com.boulevard.androidassociatedeveloper2018java.util.PreferenceUtil;
+
+import static android.content.Context.BATTERY_SERVICE;
 
 /**
  * General activity lifecycle notes:
@@ -27,13 +32,13 @@ import com.boulevard.androidassociatedeveloper2018java.util.PreferenceUtil;
  * onPause, onStop, onDestroy, onCreate, onStart, onResume
  *
  */
-public class JobSchedulerActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class JobSchedulerFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     /* View holder member variables */
     ImageButton scheduleIncrementCounterButton;
     TextView counterTextView;
-    Toolbar mainToolbar;
     ImageView chargingImageView;
+
 
     IntentFilter chargingIntentFilter;
     /* Important note: If the BroadbastReceiver was defined in the AndroidManifest (statically), registered
@@ -43,36 +48,11 @@ public class JobSchedulerActivity extends AppCompatActivity implements SharedPre
     ChargingBroadcastReceiver chargingBroadcastReceiver;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_job_scheduler);
-
-        // Setup view elements for reference, after view is created
-        scheduleIncrementCounterButton = findViewById(R.id.schedule_increment_counter_button);
-        counterTextView = findViewById(R.id.counter_textview);
-        mainToolbar = findViewById(R.id.main_toolbar);
-        chargingImageView = findViewById(R.id.charging_imageview);
-
-        // Retrieve saved out state, if it exists
-        if (savedInstanceState != null) {
-            int count = savedInstanceState.getInt("currentCount");
-            counterTextView.setText(count + "");
-        } else {
-            counterTextView.setText(0 + "");
-        }
-
-        /*
-         * Setup custom toolbar (used for launching navigation drawer)
-         */
-        setSupportActionBar(mainToolbar);
-
-        ActionBar actionbar = this.getSupportActionBar();
-        actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_hamburger_menu);
-        actionbar.setTitle("Job Scheduler");
 
         /* Setup the shared preference listener */
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
         prefs.registerOnSharedPreferenceChangeListener(this);
 
         /* Intent filter for ChargingBroadcastReceiver */
@@ -84,17 +64,52 @@ public class JobSchedulerActivity extends AppCompatActivity implements SharedPre
         chargingBroadcastReceiver = new ChargingBroadcastReceiver();
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_job_scheduler, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Setup view elements for reference, after view is created
+        scheduleIncrementCounterButton = getView().findViewById(R.id.schedule_increment_counter_button);
+        counterTextView = getView().findViewById(R.id.counter_textview);
+        chargingImageView = getView().findViewById(R.id.charging_imageview);
+
+
+        // Retrieve saved out state, if it exists
+        if (savedInstanceState != null) {
+            int count = savedInstanceState.getInt("currentCount");
+            counterTextView.setText(count + "");
+        } else {
+            counterTextView.setText(0 + "");
+        }
+
+        updateCounter();
+
+        /* Setup onClick handlers */
+        scheduleIncrementCounterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                scheduleIncrementCounter();
+            }
+        });
+    }
+
     /**
      * The activity has become visible (it is now "resumed").
      */
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
         /** Determine the current charging state (because our dynamic BroadcastReceiver doesn't listen
          * for changes when the app is closed) **/
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            BatteryManager batteryManager = (BatteryManager) getSystemService(BATTERY_SERVICE);
+            BatteryManager batteryManager = (BatteryManager) getContext().getSystemService(BATTERY_SERVICE);
             showCharging(batteryManager.isCharging());
         } else {
 
@@ -105,7 +120,7 @@ public class JobSchedulerActivity extends AppCompatActivity implements SharedPre
             // for the receiver. Pass in your intent filter as well. Passing in null means that you're
             // getting the current state of a sticky broadcast - the intent returned will contain the
             // battery information you need.
-            Intent currentBatteryStatusIntent = registerReceiver(null, ifilter);
+            Intent currentBatteryStatusIntent = getContext().registerReceiver(null, ifilter);
             // Get the integer extra BatteryManager.EXTRA_STATUS. Check if it matches
             // BatteryManager.BATTERY_STATUS_CHARGING or BatteryManager.BATTERY_STATUS_FULL. This means
             // the battery is currently charging.
@@ -117,23 +132,23 @@ public class JobSchedulerActivity extends AppCompatActivity implements SharedPre
         }
 
         /* Register the broadcast receiver that listens to changes in charging state */
-        registerReceiver(chargingBroadcastReceiver, chargingIntentFilter);
+        this.getContext().registerReceiver(chargingBroadcastReceiver, chargingIntentFilter);
     }
 
     /**
      * Another activity is taking focus (this activity is about to be "paused").
      */
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
-        unregisterReceiver(chargingBroadcastReceiver);
+        this.getContext().unregisterReceiver(chargingBroadcastReceiver);
     }
 
     /**
      * Tied to onClick within the Activity layout.
      */
-    public void scheduleIncrementCounter(View view) {
-        JobSchedulerUtil.scheduleIncrementJob(this);
+    public void scheduleIncrementCounter() {
+        JobSchedulerUtil.scheduleIncrementJob(this.getContext());
     }
 
     /**
@@ -150,7 +165,7 @@ public class JobSchedulerActivity extends AppCompatActivity implements SharedPre
      * Called when the user is leaving the activity (sometime before onStop())
      */
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
         // Save out state (if complete object, just use parcelable)
@@ -172,7 +187,7 @@ public class JobSchedulerActivity extends AppCompatActivity implements SharedPre
 
     /* Private helper methods */
     private void updateCounter() {
-        int counterCount = PreferenceUtil.getCounterCount(this);
+        int counterCount = PreferenceUtil.getCounterCount(this.getActivity());
         counterTextView.setText(counterCount + "");
     }
 

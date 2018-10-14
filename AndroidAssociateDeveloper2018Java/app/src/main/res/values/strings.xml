@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AndroidAssociateDeveloper2018Java</string>
+    <string name="nav_drawer_header_title">Exam Content Activities</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
