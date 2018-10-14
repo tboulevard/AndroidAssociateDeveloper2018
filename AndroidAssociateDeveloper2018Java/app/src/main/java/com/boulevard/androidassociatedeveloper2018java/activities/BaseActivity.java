@@ -11,16 +11,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 import com.boulevard.androidassociatedeveloper2018java.R;
 import com.boulevard.androidassociatedeveloper2018java.fragments.BaseFragment;
 import com.boulevard.androidassociatedeveloper2018java.fragments.JobSchedulerFragment;
 import com.boulevard.androidassociatedeveloper2018java.fragments.ListViewFragment;
 
+
 public class BaseActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     Toolbar mainToolbar;
+    FrameLayout fragmentContainer;
+
+    private BaseFragment baseFragment = null;
+    private JobSchedulerFragment jobSchedulerFragment = null;
+    private ListViewFragment listViewFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +37,7 @@ public class BaseActivity extends AppCompatActivity {
         // Setup view elements for reference, after view is created
         drawerLayout = findViewById(R.id.drawer_layout);
         mainToolbar = findViewById(R.id.main_toolbar);
+        fragmentContainer = findViewById(R.id.fragment_container);
 
         /*
          * Setup custom toolbar (used for launching navigation drawer)
@@ -46,9 +54,11 @@ public class BaseActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        BaseFragment fragment = BaseFragment.newInstance();
-        fragmentTransaction.replace(R.id.fragment_container, fragment);
-        fragmentTransaction.commit();
+        if(baseFragment == null) {
+            baseFragment = BaseFragment.newInstance();
+            fragmentTransaction.add(R.id.fragment_container, baseFragment, "base_fragment_tag");
+            fragmentTransaction.commit();
+        }
 
         /*
          * Navigation Drawer stuff
@@ -62,18 +72,28 @@ public class BaseActivity extends AppCompatActivity {
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 
-                if(menuItem.getItemId() == R.id.nav_list_view) {
+                if (menuItem.getItemId() == R.id.nav_list_view) {
 
-                    ListViewFragment fragment = new ListViewFragment();
-                    fragmentTransaction.replace(R.id.fragment_container, fragment);
-                    fragmentTransaction.commit();
-                }
-                else if(menuItem.getItemId() == R.id.nav_job_scheduler) {
+                    if(listViewFragment == null) {
+                        listViewFragment = new ListViewFragment();
+                        fragmentTransaction.remove(baseFragment);
+                        fragmentTransaction.add(R.id.fragment_container, listViewFragment, "listview_fragment_tag");
+                    } else {
+                        fragmentTransaction.replace(R.id.fragment_container, listViewFragment, "listview_fragment_tag");
+                    }
 
-                    JobSchedulerFragment fragment = new JobSchedulerFragment();
-                    fragmentTransaction.replace(R.id.fragment_container, fragment);
-                    fragmentTransaction.commit();
+                } else if (menuItem.getItemId() == R.id.nav_job_scheduler) {
+
+                    if(jobSchedulerFragment == null) {
+                        jobSchedulerFragment = new JobSchedulerFragment();
+                        fragmentTransaction.remove(baseFragment);
+                        fragmentTransaction.add(R.id.fragment_container, jobSchedulerFragment, "jobscheduler_fragment_tag");
+                    } else {
+                        fragmentTransaction.replace(R.id.fragment_container, jobSchedulerFragment, "jobscheduler_fragment_tag");
+                    }
                 }
+
+                fragmentTransaction.commit();
 
                 drawerLayout.closeDrawers();
 
@@ -87,7 +107,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             drawerLayout.openDrawer(GravityCompat.START);
             return true;
         }
