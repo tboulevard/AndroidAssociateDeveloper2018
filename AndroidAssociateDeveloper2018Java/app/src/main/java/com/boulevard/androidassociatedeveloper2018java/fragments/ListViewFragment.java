@@ -90,7 +90,7 @@ public class ListViewFragment extends Fragment implements TaskAdapter.ItemClickL
                     addTaskFragment = new AddTaskFragment();
                 }
 
-                fragmentTransaction.replace(R.id.fragment_container, addTaskFragment,  "add_task_fragment_tag").addToBackStack("backstack_entry_add_task");
+                fragmentTransaction.replace(R.id.fragment_container, addTaskFragment,  "add_task_fragment_tag");
                 fragmentTransaction.commit();
             }
         });
