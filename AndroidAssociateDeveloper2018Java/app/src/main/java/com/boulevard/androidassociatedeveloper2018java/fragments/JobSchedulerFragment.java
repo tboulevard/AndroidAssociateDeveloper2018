@@ -12,6 +12,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,6 +75,10 @@ public class JobSchedulerFragment extends Fragment implements SharedPreferences.
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // Un-hide action bar
+        ActionBar actionbar = ((AppCompatActivity) this.getActivity()).getSupportActionBar();
+        actionbar.show();
 
         // Setup view elements for reference, after view is created
         scheduleIncrementCounterButton = getView().findViewById(R.id.schedule_increment_counter_button);

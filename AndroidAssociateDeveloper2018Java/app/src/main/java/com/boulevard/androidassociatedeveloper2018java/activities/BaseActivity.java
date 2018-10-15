@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.boulevard.androidassociatedeveloper2018java.R;
-import com.boulevard.androidassociatedeveloper2018java.fragments.BaseFragment;
 import com.boulevard.androidassociatedeveloper2018java.fragments.JobSchedulerFragment;
 import com.boulevard.androidassociatedeveloper2018java.fragments.ListViewFragment;
 
@@ -25,7 +24,6 @@ public class BaseActivity extends AppCompatActivity {
     Toolbar mainToolbar;
     FrameLayout fragmentContainer;
 
-    private BaseFragment baseFragment = null;
     private JobSchedulerFragment jobSchedulerFragment = null;
     private ListViewFragment listViewFragment = null;
 
@@ -54,12 +52,6 @@ public class BaseActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        if(baseFragment == null) {
-            baseFragment = BaseFragment.newInstance();
-            fragmentTransaction.add(R.id.fragment_container, baseFragment, "base_fragment_tag");
-            fragmentTransaction.commit();
-        }
-
         /*
          * Navigation Drawer stuff
          */
@@ -74,23 +66,20 @@ public class BaseActivity extends AppCompatActivity {
 
                 if (menuItem.getItemId() == R.id.nav_list_view) {
 
-                    if(listViewFragment == null) {
+                    if (listViewFragment == null) {
                         listViewFragment = new ListViewFragment();
-                        fragmentTransaction.remove(baseFragment);
-                        fragmentTransaction.add(R.id.fragment_container, listViewFragment, "listview_fragment_tag");
-                    } else {
-                        fragmentTransaction.replace(R.id.fragment_container, listViewFragment, "listview_fragment_tag");
                     }
+                    getSupportActionBar().setTitle("TODO List");
+                    fragmentTransaction.replace(R.id.fragment_container, listViewFragment, "listview_fragment_tag");
 
                 } else if (menuItem.getItemId() == R.id.nav_job_scheduler) {
 
-                    if(jobSchedulerFragment == null) {
+                    if (jobSchedulerFragment == null) {
                         jobSchedulerFragment = new JobSchedulerFragment();
-                        fragmentTransaction.remove(baseFragment);
-                        fragmentTransaction.add(R.id.fragment_container, jobSchedulerFragment, "jobscheduler_fragment_tag");
-                    } else {
-                        fragmentTransaction.replace(R.id.fragment_container, jobSchedulerFragment, "jobscheduler_fragment_tag");
+
                     }
+                    getSupportActionBar().setTitle("Job Scheduler");
+                    fragmentTransaction.replace(R.id.fragment_container, jobSchedulerFragment, "jobscheduler_fragment_tag");
                 }
 
                 fragmentTransaction.commit();
