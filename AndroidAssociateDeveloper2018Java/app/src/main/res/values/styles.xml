@@ -10,4 +10,10 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
+    <!-- Style for custom white radio button color (add task fragment) -->
+    <style name="WhiteRadioButton" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlActivated">@android:color/white</item>
+    </style>
+
 </resources>
