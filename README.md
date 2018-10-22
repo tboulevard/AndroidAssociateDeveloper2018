@@ -24,7 +24,7 @@ Mark these off as they are completed ~like this~
 - ~Implement menu-based or drawer navigation~
 - Localize the app
 - Display notifications, toasts, and snackbar messages
-- ~Schedule a background task using JobScheduler!
+- ~Schedule a background task using JobScheduler~
 - ~Efficiently run jobs in the background~
 
 ### App data and files
