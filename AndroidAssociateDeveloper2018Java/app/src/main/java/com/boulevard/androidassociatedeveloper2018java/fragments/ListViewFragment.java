@@ -1,5 +1,7 @@
 package com.boulevard.androidassociatedeveloper2018java.fragments;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +15,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +24,7 @@ import com.boulevard.androidassociatedeveloper2018java.R;
 import com.boulevard.androidassociatedeveloper2018java.activities.AddTaskActivity;
 import com.boulevard.androidassociatedeveloper2018java.database.AppDatabase;
 import com.boulevard.androidassociatedeveloper2018java.database.AppExecutors;
+import com.boulevard.androidassociatedeveloper2018java.database.ListViewModel;
 import com.boulevard.androidassociatedeveloper2018java.database.TaskAdapter;
 import com.boulevard.androidassociatedeveloper2018java.model.TaskEntry;
 
@@ -38,6 +42,9 @@ public class ListViewFragment extends Fragment implements TaskAdapter.ItemClickL
     public static final String EXTRA_TASK_ID = "extraTaskId";
     // Extra for the task ID to be received after rotation
     public static final String INSTANCE_TASK_ID = "instanceTaskId";
+
+    // Constant for logging
+    private static final String TAG = ListViewFragment.class.getSimpleName();
 
     private AppDatabase mDb;
 
@@ -111,8 +118,8 @@ public class ListViewFragment extends Fragment implements TaskAdapter.ItemClickL
                         List<TaskEntry> tasks = taskAdapter.getTasks();
                         // Call deleteTask in the taskDao with the task at that position
                         mDb.taskDao().deleteTask(tasks.get(position));
-                        // Call retrieveTasks method to refresh the UI
-                        retrieveTasks();
+                        // Call setUpViewModel method to refresh the UI
+                        setUpViewModel();
                     }
                 });
             }
@@ -144,22 +151,19 @@ public class ListViewFragment extends Fragment implements TaskAdapter.ItemClickL
         super.onResume();
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         fragmentManager.popBackStack();
-        retrieveTasks();
+        setUpViewModel();
     }
 
-    private void retrieveTasks() {
-        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+    private void setUpViewModel() {
+        // COMPLETED (5) Remove the logging and the call to loadAllTasks, this is done in the ViewModel now
+        // COMPLETED (6) Declare a ViewModel variable and initialize it by calling ViewModelProviders.of
+        ListViewModel viewModel = ViewModelProviders.of(this).get(ListViewModel.class);
+        // COMPLETED (7) Observe the LiveData object in the ViewModel
+        viewModel.getTasks().observe(this, new Observer<List<TaskEntry>>() {
             @Override
-            public void run() {
-                final List<TaskEntry> tasks = mDb.taskDao().loadAllTasks();
-                // We will be able to simplify this once we learn more
-                // about Android Architecture Components
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        taskAdapter.setTasks(tasks);
-                    }
-                });
+            public void onChanged(@Nullable List<TaskEntry> taskEntries) {
+                Log.d(TAG, "Updating list of tasks from LiveData in ViewModel");
+                taskAdapter.setTasks(taskEntries);
             }
         });
     }

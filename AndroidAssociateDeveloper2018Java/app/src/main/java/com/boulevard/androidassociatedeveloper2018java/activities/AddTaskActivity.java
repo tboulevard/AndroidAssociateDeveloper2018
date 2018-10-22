@@ -1,7 +1,10 @@
 package com.boulevard.androidassociatedeveloper2018java.activities;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +12,8 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 
 import com.boulevard.androidassociatedeveloper2018java.R;
+import com.boulevard.androidassociatedeveloper2018java.database.AddTaskViewModel;
+import com.boulevard.androidassociatedeveloper2018java.database.AddTaskViewModelFactory;
 import com.boulevard.androidassociatedeveloper2018java.database.AppDatabase;
 import com.boulevard.androidassociatedeveloper2018java.database.AppExecutors;
 import com.boulevard.androidassociatedeveloper2018java.model.TaskEntry;
@@ -56,28 +61,23 @@ public class AddTaskActivity extends AppCompatActivity {
         if (intent != null && intent.hasExtra(EXTRA_TASK_ID)) {
             mButton.setText(R.string.update_button);
             if (mTaskId == DEFAULT_TASK_ID) {
-                // populate the UI
-                // Assign the value of EXTRA_TASK_ID in the intent to mTaskId
-                // Use DEFAULT_TASK_ID as the default
+
                 mTaskId = intent.getIntExtra(EXTRA_TASK_ID, DEFAULT_TASK_ID);
-                // Get the diskIO Executor from the instance of AppExecutors and
-                // call the diskIO execute method with a new Runnable and implement its run method
-                AppExecutors.getInstance().diskIO().execute(new Runnable() {
+
+                // Remove the logging and the call to loadTaskById, this is done in the ViewModel now
+                // Declare a AddTaskViewModelFactory using mDb and mTaskId
+                AddTaskViewModelFactory factory = new AddTaskViewModelFactory(mDb, mTaskId);
+                // Declare a AddTaskViewModel variable and initialize it by calling ViewModelProviders.of
+                // for that use the factory created above AddTaskViewModel
+                final AddTaskViewModel viewModel
+                        = ViewModelProviders.of(this, factory).get(AddTaskViewModel.class);
+
+                // Observe the LiveData object in the ViewModel. Use it also when removing the observer
+                viewModel.getTask().observe(this, new Observer<TaskEntry>() {
                     @Override
-                    public void run() {
-                        // Use the loadTaskById method to retrieve the task with id mTaskId and
-                        // assign its value to a final TaskEntry variable
-                        final TaskEntry taskEntry = mDb.taskDao().loadTaskById(mTaskId);
-                        // Call the populateUI method with the retrieve tasks
-                        // Remember to wrap it in a call to runOnUiThread
-                        // We will be able to simplify this once we learn more
-                        // about Android Architecture Components
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                populateUI(taskEntry);
-                            }
-                        });
+                    public void onChanged(@Nullable TaskEntry taskEntry) {
+                        viewModel.getTask().removeObserver(this);
+                        populateUI(taskEntry);
                     }
                 });
             }
