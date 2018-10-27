@@ -12,20 +12,22 @@
 
         <!-- This is the Service declaration used in conjunction with FirebaseJobDispatcher -->
         <service
-            android:name=".IncrementFirebaseJobService"
+            android:name=".jobscheduler.IncrementFirebaseJobService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
             </intent-filter>
         </service>
 
-        <activity android:name=".activities.BaseActivity">
+        <activity android:name=".common.BaseActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".todolist.AddTaskActivity" />
+        <activity android:name=".boardingpass.BoardingPassActivity" />
     </application>
 
 </manifest>

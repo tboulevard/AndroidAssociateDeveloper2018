@@ -1,4 +1,4 @@
-package com.boulevard.androidassociatedeveloper2018java.model;
+package com.boulevard.androidassociatedeveloper2018java.common.models;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
@@ -20,7 +20,7 @@ public class TaskEntry {
     @Ignore // Ignored because we use this to read from DB
     public TaskEntry(String description, int priority, Date updatedAt) {
         this.description = description;
-        this.priority = 1;
+        this.priority = priority;
         this.updatedAt = updatedAt;
     }
 
@@ -29,7 +29,7 @@ public class TaskEntry {
     public TaskEntry(int id, String description, int priority, Date updatedAt) {
         this.id = id;
         this.description = description;
-        this.priority = 1;
+        this.priority = priority;
         this.updatedAt = updatedAt;
     }
 

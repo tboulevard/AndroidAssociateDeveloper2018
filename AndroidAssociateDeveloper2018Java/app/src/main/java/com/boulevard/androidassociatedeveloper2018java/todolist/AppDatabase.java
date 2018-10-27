@@ -1,4 +1,4 @@
-package com.boulevard.androidassociatedeveloper2018java.database;
+package com.boulevard.androidassociatedeveloper2018java.todolist;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
@@ -7,7 +7,7 @@ import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.util.Log;
 
-import com.boulevard.androidassociatedeveloper2018java.model.TaskEntry;
+import com.boulevard.androidassociatedeveloper2018java.common.models.TaskEntry;
 
 @Database(entities = {TaskEntry.class}, version = 1, exportSchema = false)
 @TypeConverters(DateConverter.class)

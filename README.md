@@ -19,7 +19,7 @@ Mark these off as they are completed ~like this~
 - Add accessibility hooks to a custom view
 - Apply content descriptions to views for accessibility
 - ~Implement a custom app theme~
-- Display items in a RecyclerView
+- ~Display items in a RecyclerView~
 - Bind local data to a RecyclerView list using the paging library
 - ~Implement menu-based or drawer navigation~
 - Localize the app
@@ -29,8 +29,8 @@ Mark these off as they are completed ~like this~
 
 ### App data and files
 - ~Define data using Room entities~
-- Access Room database with data access object (DAO)
-- Observe and respond to changing data using LiveData
+- ~Access Room database with data access object (DAO)~
+- ~Observe and respond to changing data using LiveData~
 - Use a Repository to handle data operations
 - Read and parse raw resources or asset files
 - ~Create persistent preference data from user input~

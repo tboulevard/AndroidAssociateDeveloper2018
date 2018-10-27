@@ -1,5 +1,6 @@
-package com.boulevard.androidassociatedeveloper2018java.activities;
+package com.boulevard.androidassociatedeveloper2018java.common;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -14,8 +15,9 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.boulevard.androidassociatedeveloper2018java.R;
-import com.boulevard.androidassociatedeveloper2018java.fragments.JobSchedulerFragment;
-import com.boulevard.androidassociatedeveloper2018java.fragments.ListViewFragment;
+import com.boulevard.androidassociatedeveloper2018java.boardingpass.BoardingPassActivity;
+import com.boulevard.androidassociatedeveloper2018java.jobscheduler.JobSchedulerFragment;
+import com.boulevard.androidassociatedeveloper2018java.todolist.ListViewFragment;
 
 
 public class BaseActivity extends AppCompatActivity {
@@ -71,6 +73,7 @@ public class BaseActivity extends AppCompatActivity {
                     }
                     getSupportActionBar().setTitle("TODO List");
                     fragmentTransaction.replace(R.id.fragment_container, listViewFragment, "listview_fragment_tag");
+                    fragmentTransaction.commit();
 
                 } else if (menuItem.getItemId() == R.id.nav_job_scheduler) {
 
@@ -80,9 +83,13 @@ public class BaseActivity extends AppCompatActivity {
                     }
                     getSupportActionBar().setTitle("Job Scheduler");
                     fragmentTransaction.replace(R.id.fragment_container, jobSchedulerFragment, "jobscheduler_fragment_tag");
-                }
+                    fragmentTransaction.commit();
 
-                fragmentTransaction.commit();
+                } else if (menuItem.getItemId() == R.id.nav_boarding_pass) {
+
+                    Intent boardingPassIntent = new Intent(BaseActivity.this, BoardingPassActivity.class);
+                    startActivity(boardingPassIntent);
+                }
 
                 drawerLayout.closeDrawers();
 

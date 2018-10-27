@@ -16,6 +16,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -50,7 +53,6 @@ dependencies {
 
     // Test helpers for Room
     testImplementation "android.arch.persistence.room:testing:1.1.1"
-
 
 
 }

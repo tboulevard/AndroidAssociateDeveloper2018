@@ -1,4 +1,4 @@
-package com.boulevard.androidassociatedeveloper2018java.util;
+package com.boulevard.androidassociatedeveloper2018java.common.util;
 
 
 import android.content.Context;

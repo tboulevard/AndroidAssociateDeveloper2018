@@ -1,4 +1,4 @@
-package com.boulevard.androidassociatedeveloper2018java;
+package com.boulevard.androidassociatedeveloper2018java.jobscheduler;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

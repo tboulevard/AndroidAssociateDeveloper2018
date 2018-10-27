@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-    This vertical linear layout contains all the views in the AddTaskFragment code.
+    This vertical linear layout contains all the views in the AddTaskActivity code.
     This includes an EditText to adtaskEntrytask description, and buttons to select a priority
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

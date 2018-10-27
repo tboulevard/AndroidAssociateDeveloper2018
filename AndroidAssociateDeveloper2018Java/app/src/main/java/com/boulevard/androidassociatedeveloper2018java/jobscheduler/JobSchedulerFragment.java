@@ -1,4 +1,4 @@
-package com.boulevard.androidassociatedeveloper2018java.fragments;
+package com.boulevard.androidassociatedeveloper2018java.jobscheduler;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -22,8 +22,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.boulevard.androidassociatedeveloper2018java.R;
-import com.boulevard.androidassociatedeveloper2018java.util.JobSchedulerUtil;
-import com.boulevard.androidassociatedeveloper2018java.util.PreferenceUtil;
+import com.boulevard.androidassociatedeveloper2018java.common.util.JobSchedulerUtil;
+import com.boulevard.androidassociatedeveloper2018java.common.util.PreferenceUtil;
 
 import static android.content.Context.BATTERY_SERVICE;
 
