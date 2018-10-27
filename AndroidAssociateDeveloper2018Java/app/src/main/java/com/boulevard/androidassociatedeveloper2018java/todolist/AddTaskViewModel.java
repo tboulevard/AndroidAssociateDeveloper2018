@@ -1,9 +1,9 @@
-package com.boulevard.androidassociatedeveloper2018java.database;
+package com.boulevard.androidassociatedeveloper2018java.todolist;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.boulevard.androidassociatedeveloper2018java.model.TaskEntry;
+import com.boulevard.androidassociatedeveloper2018java.common.models.TaskEntry;
 
 
 // Make this class extend ViewModel

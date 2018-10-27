@@ -1,4 +1,4 @@
-package com.boulevard.androidassociatedeveloper2018java.database;
+package com.boulevard.androidassociatedeveloper2018java.todolist;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
@@ -8,7 +8,7 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.boulevard.androidassociatedeveloper2018java.model.TaskEntry;
+import com.boulevard.androidassociatedeveloper2018java.common.models.TaskEntry;
 
 import java.util.List;
 

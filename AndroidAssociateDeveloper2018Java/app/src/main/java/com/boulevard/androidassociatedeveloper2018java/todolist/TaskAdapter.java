@@ -1,4 +1,4 @@
-package com.boulevard.androidassociatedeveloper2018java.database;
+package com.boulevard.androidassociatedeveloper2018java.todolist;
 
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.boulevard.androidassociatedeveloper2018java.R;
-import com.boulevard.androidassociatedeveloper2018java.model.TaskEntry;
+import com.boulevard.androidassociatedeveloper2018java.common.models.TaskEntry;
 
 import java.text.SimpleDateFormat;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.boulevard.androidassociatedeveloper2018java.fragments;
+package com.boulevard.androidassociatedeveloper2018java.todolist;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -21,12 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.boulevard.androidassociatedeveloper2018java.R;
-import com.boulevard.androidassociatedeveloper2018java.activities.AddTaskActivity;
-import com.boulevard.androidassociatedeveloper2018java.database.AppDatabase;
-import com.boulevard.androidassociatedeveloper2018java.database.AppExecutors;
-import com.boulevard.androidassociatedeveloper2018java.database.ListViewModel;
-import com.boulevard.androidassociatedeveloper2018java.database.TaskAdapter;
-import com.boulevard.androidassociatedeveloper2018java.model.TaskEntry;
+import com.boulevard.androidassociatedeveloper2018java.common.models.TaskEntry;
 
 
 import java.util.List;
@@ -118,8 +113,14 @@ public class ListViewFragment extends Fragment implements TaskAdapter.ItemClickL
                         List<TaskEntry> tasks = taskAdapter.getTasks();
                         // Call deleteTask in the taskDao with the task at that position
                         mDb.taskDao().deleteTask(tasks.get(position));
-                        // Call setUpViewModel method to refresh the UI
-                        setUpViewModel();
+
+                        // Make sure UI updating code runs on main thread
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                setUpViewModel();
+                            }
+                        });
                     }
                 });
             }

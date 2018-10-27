@@ -1,4 +1,4 @@
-package com.boulevard.androidassociatedeveloper2018java.activities;
+package com.boulevard.androidassociatedeveloper2018java.todolist;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -12,11 +12,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 
 import com.boulevard.androidassociatedeveloper2018java.R;
-import com.boulevard.androidassociatedeveloper2018java.database.AddTaskViewModel;
-import com.boulevard.androidassociatedeveloper2018java.database.AddTaskViewModelFactory;
-import com.boulevard.androidassociatedeveloper2018java.database.AppDatabase;
-import com.boulevard.androidassociatedeveloper2018java.database.AppExecutors;
-import com.boulevard.androidassociatedeveloper2018java.model.TaskEntry;
+import com.boulevard.androidassociatedeveloper2018java.common.models.TaskEntry;
 
 import java.util.Date;
 

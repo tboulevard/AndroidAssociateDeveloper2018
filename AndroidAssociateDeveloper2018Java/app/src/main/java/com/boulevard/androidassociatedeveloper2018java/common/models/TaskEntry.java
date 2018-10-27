@@ -1,4 +1,4 @@
-package com.boulevard.androidassociatedeveloper2018java.model;
+package com.boulevard.androidassociatedeveloper2018java.common.models;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

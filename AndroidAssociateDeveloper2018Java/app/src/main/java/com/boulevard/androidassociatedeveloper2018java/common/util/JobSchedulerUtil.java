@@ -1,9 +1,9 @@
-package com.boulevard.androidassociatedeveloper2018java.util;
+package com.boulevard.androidassociatedeveloper2018java.common.util;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.boulevard.androidassociatedeveloper2018java.IncrementFirebaseJobService;
+import com.boulevard.androidassociatedeveloper2018java.jobscheduler.IncrementFirebaseJobService;
 import com.firebase.jobdispatcher.Constraint;
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;

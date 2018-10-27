@@ -1,11 +1,11 @@
-package com.boulevard.androidassociatedeveloper2018java.database;
+package com.boulevard.androidassociatedeveloper2018java.todolist;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.util.Log;
 
-import com.boulevard.androidassociatedeveloper2018java.model.TaskEntry;
+import com.boulevard.androidassociatedeveloper2018java.common.models.TaskEntry;
 
 import java.util.List;
 

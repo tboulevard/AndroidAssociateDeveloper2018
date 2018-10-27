@@ -1,8 +1,8 @@
-package com.boulevard.androidassociatedeveloper2018java;
+package com.boulevard.androidassociatedeveloper2018java.jobscheduler;
 
 import android.content.Context;
 
-import com.boulevard.androidassociatedeveloper2018java.util.PreferenceUtil;
+import com.boulevard.androidassociatedeveloper2018java.common.util.PreferenceUtil;
 
 public class CounterTasks {
 
