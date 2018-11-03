@@ -7,7 +7,7 @@ Repo for tackling the Android Associate Developer Exam in 2018.
 Mark these off as they are completed ~like this~
 
 ### Testing and debugging
-- Write and execute local JVM unit tests
+- ~Write and execute local JVM unit tests~
 - Write and execute Android UI tests
 - ~Use the system log to output debug information~
 - ~Debug and fix issues with an app's functional behavior and usability~
@@ -15,8 +15,8 @@ Mark these off as they are completed ~like this~
 ### User interface (UI) and app functionality
 - ~Create an Activity that displays a layout~
 - ~Construct a UI with ConstraintLayout~
-- Create a custom view class and add it to a layout
-- Add accessibility hooks to a custom view
+- ~Create a custom view class and add it to a layout~
+- ~Add accessibility hooks to a custom view~
 - ~Apply content descriptions to views for accessibility~
 - ~Implement a custom app theme~
 - ~Display items in a RecyclerView~
