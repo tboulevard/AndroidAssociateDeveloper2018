@@ -193,7 +193,7 @@ public class JobSchedulerFragment extends Fragment implements SharedPreferences.
 
     /* Private helper methods */
     private void updateCounter() {
-        int counterCount = PreferenceUtil.getCounterCount(this.getActivity());
+        int counterCount = PreferenceUtil.getCounterCount(this.getContext());
         counterTextView.setText(counterCount + "");
     }
 

@@ -34,7 +34,12 @@
     <string name="terminal">2</string>
     <string name="gate">58B</string>
     <string name="seat">24A</string>
-    <string name="countDownFormat" >%1$02d:%2$02d</string>
+    <string name="countDownFormat">%1$02d:%2$02d</string>
     <string name="timeFormat">hh:mm a</string>
     <string name="barcode_content_description">Barcode to scan before boarding.</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pref_show_action_bar">show_action_bar</string>
 </resources>
