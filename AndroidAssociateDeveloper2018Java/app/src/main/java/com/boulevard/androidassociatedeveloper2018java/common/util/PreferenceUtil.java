@@ -22,4 +22,8 @@ public class PreferenceUtil {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getInt(KEY_COUNTER, 0);
     }
+
+    public static SharedPreferences getSharedPreferences(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context);
+    }
 }

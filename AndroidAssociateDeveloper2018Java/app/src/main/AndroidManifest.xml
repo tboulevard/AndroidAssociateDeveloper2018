@@ -19,7 +19,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".common.BaseActivity">
+        <activity android:name=".common.BaseActivity"
+            android:launchMode="singleTop"> <!-- Makes it so when we navigate back from the SettingsActivity, we don't remake BaseActivity -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,6 +29,15 @@
         </activity>
         <activity android:name=".todolist.AddTaskActivity" />
         <activity android:name=".boardingpass.BoardingPassActivity" />
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:label="@string/action_settings"
+            android:parentActivityName=".common.BaseActivity"
+            android:theme="@style/BoulevardThemeActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".common.BaseActivity"/>
+        </activity>
     </application>
 
 </manifest>

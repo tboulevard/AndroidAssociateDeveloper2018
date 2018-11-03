@@ -1,6 +1,7 @@
 package com.boulevard.androidassociatedeveloper2018java.common;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -11,16 +12,20 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.boulevard.androidassociatedeveloper2018java.R;
 import com.boulevard.androidassociatedeveloper2018java.boardingpass.BoardingPassActivity;
+import com.boulevard.androidassociatedeveloper2018java.common.util.PreferenceUtil;
 import com.boulevard.androidassociatedeveloper2018java.jobscheduler.JobSchedulerFragment;
+import com.boulevard.androidassociatedeveloper2018java.settings.SettingsActivity;
 import com.boulevard.androidassociatedeveloper2018java.todolist.ListViewFragment;
 
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     DrawerLayout drawerLayout;
     Toolbar mainToolbar;
@@ -42,12 +47,19 @@ public class BaseActivity extends AppCompatActivity {
         /*
          * Setup custom toolbar (used for launching navigation drawer)
          */
+        Boolean showActionBar = PreferenceUtil.getSharedPreferences(this)
+                .getBoolean(getString(R.string.pref_show_action_bar), true);
+
         setSupportActionBar(mainToolbar);
 
-        ActionBar actionbar = getSupportActionBar();
-        actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_hamburger_menu);
-        actionbar.setTitle("Home");
+        if (showActionBar) {
+            ActionBar actionbar = getSupportActionBar();
+            actionbar.setDisplayHomeAsUpEnabled(true);
+            actionbar.setHomeAsUpIndicator(R.drawable.ic_hamburger_menu);
+            actionbar.setTitle("Home");
+        } else {
+            getSupportActionBar().setTitle("Disabled");
+        }
 
         /* Auto populate with base fragment */
         /* TODO: Ignore this for screen rotation */
@@ -97,6 +109,15 @@ public class BaseActivity extends AppCompatActivity {
             }
         };
         navigationView.setNavigationItemSelectedListener(listener);
+
+        // Register onSharedPreferenceChangeListener
+        PreferenceUtil.getSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        PreferenceUtil.getSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
     }
 
     /* Options item selection */
@@ -106,7 +127,39 @@ public class BaseActivity extends AppCompatActivity {
         if (item.getItemId() == android.R.id.home) {
             drawerLayout.openDrawer(GravityCompat.START);
             return true;
+        } else if (item.getItemId() == R.id.action_settings) {
+            Intent settingsActivityIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsActivityIntent);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * For settings menu
+     *
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.settings_menu, menu);
+        return true;
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key.equals(getString(R.string.pref_show_action_bar))) {
+            Boolean showActionBar = sharedPreferences.getBoolean(key, true);
+            if (showActionBar) {
+                setSupportActionBar(mainToolbar);
+                ActionBar actionbar = getSupportActionBar();
+                actionbar.setDisplayHomeAsUpEnabled(true);
+                actionbar.setHomeAsUpIndicator(R.drawable.ic_hamburger_menu);
+                actionbar.setTitle("Home");
+            } else {
+                getSupportActionBar().setTitle("Disabled");
+            }
+        }
     }
 }
