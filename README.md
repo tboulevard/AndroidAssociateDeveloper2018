@@ -8,7 +8,7 @@ Mark these off as they are completed ~like this~
 
 ### Testing and debugging
 - ~Write and execute local JVM unit tests~
-- Write and execute Android UI tests
+- ~Write and execute Android UI tests~
 - ~Use the system log to output debug information~
 - ~Debug and fix issues with an app's functional behavior and usability~
 
@@ -31,7 +31,7 @@ Mark these off as they are completed ~like this~
 - ~Define data using Room entities~
 - ~Access Room database with data access object (DAO)~
 - ~Observe and respond to changing data using LiveData~
-- Use a Repository to handle data operations
+- ~Use a Repository to handle data operations~
 - Read and parse raw resources or asset files
 - ~Create persistent preference data from user input~
 - ~Change the behavior of the app based on user preferences~
