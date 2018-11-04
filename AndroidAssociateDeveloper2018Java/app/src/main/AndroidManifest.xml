@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.boulevard.androidassociatedeveloper2018java">
 
+    <!--
+    Content Provider Permissions:
+
+    NOTE: Need to have this app installed to use this content provider on phone:
+    https://github.com/udacity/DroidTermsExample-APK/raw/master/droidtermsexample-release.apk
+    -->
+    <uses-permission android:name="com.example.udacity.droidtermsexample.TERMS_READ" />
+    
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,7 +27,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".common.BaseActivity"
+        <activity
+            android:name=".common.BaseActivity"
             android:launchMode="singleTop"> <!-- Makes it so when we navigate back from the SettingsActivity, we don't remake BaseActivity -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,8 +45,9 @@
             android:theme="@style/BoulevardThemeActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".common.BaseActivity"/>
+                android:value=".common.BaseActivity" />
         </activity>
+        <activity android:name=".contentprovider.ContentProviderActivity"></activity>
     </application>
 
 </manifest>
