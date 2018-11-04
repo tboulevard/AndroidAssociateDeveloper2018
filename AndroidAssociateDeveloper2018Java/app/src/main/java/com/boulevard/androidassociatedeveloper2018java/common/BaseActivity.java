@@ -15,11 +15,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import com.boulevard.androidassociatedeveloper2018java.R;
 import com.boulevard.androidassociatedeveloper2018java.boardingpass.BoardingPassActivity;
 import com.boulevard.androidassociatedeveloper2018java.common.util.PreferenceUtil;
+import com.boulevard.androidassociatedeveloper2018java.contentprovider.ContentProviderActivity;
 import com.boulevard.androidassociatedeveloper2018java.jobscheduler.JobSchedulerFragment;
 import com.boulevard.androidassociatedeveloper2018java.settings.SettingsActivity;
 import com.boulevard.androidassociatedeveloper2018java.todolist.ListViewFragment;
@@ -161,5 +163,10 @@ public class BaseActivity extends AppCompatActivity implements SharedPreferences
                 getSupportActionBar().setTitle("Disabled");
             }
         }
+    }
+
+    public void launchContentProviderActivity(View view) {
+        Intent contentProviderActivityIntent = new Intent(this, ContentProviderActivity.class);
+        startActivity(contentProviderActivityIntent);
     }
 }
