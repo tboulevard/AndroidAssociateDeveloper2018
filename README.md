@@ -20,10 +20,10 @@ Mark these off as they are completed ~like this~
 - ~Apply content descriptions to views for accessibility~
 - ~Implement a custom app theme~
 - ~Display items in a RecyclerView~
-- Bind local data to a RecyclerView list using the paging library
+- ~Bind local data to a RecyclerView list using the paging library~
 - ~Implement menu-based or drawer navigation~
 - ~Localize the app~
-- Display notifications, toasts, and snackbar messages
+- ~Display notifications, toasts, and snackbar messages~
 - ~Schedule a background task using JobScheduler~
 - ~Efficiently run jobs in the background~
 
@@ -32,32 +32,9 @@ Mark these off as they are completed ~like this~
 - ~Access Room database with data access object (DAO)~
 - ~Observe and respond to changing data using LiveData~
 - ~Use a Repository to handle data operations~
-- Read and parse raw resources or asset files
+- ~Read and parse raw resources or asset files~
 - ~Create persistent preference data from user input~
 - ~Change the behavior of the app based on user preferences~
-
-### Lesson Notes
-
-**Lession 5**
-- Prefer webp & PNG images for Drawable resources
-- A 9-patch is a PNG image in which you define stretchable regions. Use a 9-patch as the background image for a View to make sure the View looks correct for different screen sizes and orientations. Save 9-patch files with a .9.png extension and store them in the res/drawable folder. Use them with the android:src attribute for an ImageView and its descendants, or to create a NinePatchDrawable class in Java code.
-- What's the difference between a style and a theme?
-   > A style applies to a View. In XML, you apply a style using the style attribute.
-   > A theme applies to an Activity or an entire app, rather than to an individual View. In XML, you apply a theme using the android:theme attribute.
-   > **Note:** Any style can be used as a theme. For example, you could apply the CodeFont style as a theme for an Activity, and all the text inside the Activity would use gray monospace font.
-   
-**Background Tasks Notes**
-- Service vs. Loader Use Case Guidelines
-   - Loader
-      - Tied to the Activity Lifecycle
-      - Easy to make **user interface changes** and communicate with Activity 
-      - E.g.: Query database to populate recyclerview
-      - **In short:** If you're loading or processing data that will be used in the UI, use a loader.
-   - Service
-      - Decoupled from user interface
-      - Exists **even when there is no user interface**
-      - **In short:** If you need to process, upload, or download data in a way where the end result will not directly affect the UI, use a service.
-
 
 ## Resources
 
