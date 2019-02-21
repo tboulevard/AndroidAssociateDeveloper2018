@@ -42,6 +42,8 @@ Mark these off as they are completed ~like this~
 
 [Android Developer Fundamentals (Version 2)](https://google-developer-training.github.io/android-developer-fundamentals-course-concepts-v2/)
 
+[Udacity: Advanced Android App Development](https://classroom.udacity.com/courses/ud855)
+
 ## IMPORTANT NOTES
 
 - If you plan to take the exam at a certain predefined time (for me it was Saturday 10 am), **I’d suggest you do the payment, subscription, and ID verification at least one day before taking it.** Actually, after you pay, you’ll be asked to scan either a passport or a driving license (not all countries driving licenses are supported), once you do you’ll have to wait for up to few hours to get verified. You won’t be able to take the exam before getting your ID verified.
