@@ -1,6 +1,6 @@
 # AndroidAssociateDeveloper2018
 
-Repo for tackling the Android Associate Developer Exam in 2018. Most of the below exam content is implemented in the Java version (opted for Java because the exam does not support Kotlin as of November 2018).
+This repository was used to track what exam content I covered while studying for the Android Associate Developer Exam in 2018. Most of the below exam content is implemented in the Java app -- I opted to do this because the exam did not support Kotlin as of November 2018.
 
 ## Exam Content
 
